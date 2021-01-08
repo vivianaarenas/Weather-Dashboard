@@ -1,24 +1,26 @@
-let searchButton = $("#SearchButton");
-var location = $("#searchInput").val().trim();
-
-var APIKey = "3de6b63c33a60d225104b1ff597cb08d";
-var queryURL =
-  "https://api.openweathermap.org/data/2.5/weather?" +
-  "q=" +
-  location +
-  "&appid=" +
-  APIKey;
+const searchButton = $("#searchButton");
+const locationInput = $("#searchInput");
 
 $("#searchButton").on("click", function (event) {
   alert("Works?");
   event.preventDefault();
-  console.log($("#searchInput").val());
+  var location = locationInput.val().trim();
+
+  var APIKey = "3de6b63c33a60d225104b1ff597cb08d";
+  var queryURL =
+    "https://api.openweathermap.org/data/2.5/weather?" +
+    "q=" +
+    location +
+    "&appid=" +
+    APIKey;
   $.ajax({
     url: queryURL,
     method: "GET",
   }).then(function (response) {
     //display response in the console log
-    console.log(reponse);
+    console.log(response);
+
+    // console.log(location);
     //   $(".city").html("<h1>" + response.name + "Weather</h1>");
     //   $(".date").text(
     //     luxon.DateTime.local().toLocaleString({
