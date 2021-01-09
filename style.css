@@ -3,6 +3,10 @@ body {
   font-family: "Lato", sans-serif;
 }
 
+.search-container {
+  margin: 10px;
+  padding: 10px;
+}
 .sidebar {
   margin: 10px;
   padding: 10px;

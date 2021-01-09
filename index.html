@@ -11,6 +11,7 @@
       integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
       crossorigin="anonymous"
     />
+
     <script
       src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"
       integrity="sha384-q2kxQ16AaE6UbzuKqyBE9/u/KzioAlnx2maXQHiDX9d4/zp8Ok3f+M7DPm+Ib6IU"
@@ -23,11 +24,12 @@
     ></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/1ab94dd29b.js" crossorigin="anonymous"></script>
+    
   </head>
   <header>
     <!--Nav Bar with Weather Dashboard in it-->
     <nav class="navbar navbar-light" style="background-color: #e3f2fd">
-      <a class="navbar-brand" id=>Weather Dashboard</a>
+      <a class="navbar-brand" id="navbar">Weather Dashboard</a>
         <div class="search-container">
           <form class="searchBar">
             <input type="text" id=searchInput placeholder="Search.." name="search">
@@ -49,26 +51,24 @@
       <a href="#contact">My Local Storage</a>
       <a href="#about">Yes</a>
     </div>
-    
-    <div class="content">
-      <h2>Responsive Sidebar Example</h2>
-      <p>This example use media queries to transform the sidebar to a top navigation bar when the screen size is 700px or less.</p>
-      <p>We have also added a media query for screens that are 400px or less, which will vertically stack and center the navigation links.</p>
-      <h3>Resize the browser window to see the effect.</h3>
-    
-    
-
+  
+  <div class="content">
+      <h2 id="nameEl" id="icon">City: </h2>
+      <p id="temp">Temperature:</p>
+      <p id="humidity">Humidity</p>
+      <p id="windspeed">Windspeed</p>
+      <p id="UVIndex">UV Index:</p>
+      
     <div class="card" style="width: 18rem">
       <!-- <img class="card-img-top" src="..." alt="Card image cap" /> -->
       <div class="card-body">
-        <h5 class="card-title">Card title</h5>
+        <h5 class="card-title">City Name</h5>
         <p class="card-text">
-          Some quick example text to build on the card title and make up the
-          bulk of the card's content.
+        This needs the date, an icon, temperature and humidity
         </p>
         <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
-    </div>
+    </div> 
   </div>
     <!-- Ability to search for a city -->
     <!--have the abiltiy to save the cities in a list on the left hand side through local storage-->
