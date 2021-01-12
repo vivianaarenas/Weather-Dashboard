@@ -43,7 +43,7 @@ $("#searchButton").on("click", function (event) {
 
 function render5day(location) {
   var forecastURL =
-    "api.openweathermap.org/data/2.5/forecast?q=" +
+    "https://api.openweathermap.org/data/2.5/forecast?q=" +
     location +
     "&appid=" +
     APIKey;
