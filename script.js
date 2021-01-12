@@ -1,11 +1,11 @@
 const searchButton = $("#searchButton");
 const locationInput = $("#searchInput");
 
-var APIKey = "3de6b63c33a60d225104b1ff597cb08d";
+const APIKey = "3de6b63c33a60d225104b1ff597cb08d";
 
 $("#searchButton").on("click", function (event) {
   event.preventDefault();
-  let location = locationInput.val().trim();
+  var location = locationInput.val().trim();
   var currentweatherURL =
     "https://api.openweathermap.org/data/2.5/weather?" +
     "q=" +
@@ -37,61 +37,38 @@ $("#searchButton").on("click", function (event) {
     var windspeed = locationInfo.wind.speed;
     var windspeedEl = $("#windspeed");
     windspeedEl.text(`Windspeed: ${windspeed}`);
-
-    // var uvindex = locationInfo.current.uvi;
-    // var uvindexEl = $("#UVIndex");
-    // uvindexEl.text(`UV Index: ${uvindex}`);
-
-    // console.log(location);
-    //   $(".city").html("<h1>" + response.name + "Weather</h1>");
-    //   $(".date").text(
-    //     luxon.DateTime.local().toLocaleString({
-    //       weekday: "long",
-    //       month: "long",
-    //       day: "2-digit",
   });
-
-  //
-
-  //   let weatherArt = locationInfo.weather[0].icon;
-  //   //let iconurl = "https://openweatherman.org/img/w/" + weatherArt;
-  //   var iconEl = $("#icon");
-  //   iconEl.attr({ src: locationInfo.weather[0].icon });
-
-  //   //
-  //   console.log($("#searchInput").val());
-  // var cardEl = $("<div>").addClass("card");
-  // // var imageEl = $("<img>");
-  // // imageEl.attr({ src: weather
-  // var locationInfo = location.info;
-  // var cardBodyEl = $("<div>").addClass("card-body");
-  // var cardTitleEl = $("<h5>").text(locationInfo)
-
-  // render5day(location);
+  render5day(location);
 });
 
-// function render5day(location) {
+function render5day(location) {
+  var forecastURL =
+    "api.openweathermap.org/data/2.5/forecast?q=" +
+    location +
+    "&appid=" +
+    APIKey;
+  $.ajax({
+    url: forecastURL,
+    method: "GET",
+  }).then(function (response) {
+    var forecastInfo = response;
 
-//     var APIKey = "3de6b63c33a60d225104b1ff597cb08d";
-//   var forecastURL =
-//     "https://api.openweathermap.org/data/2.5/weather?" +
-//     "q=" +
-//     location +
-//     "&appid=" +
-//     APIKey;
-//   $.ajax({
-//     url: forecastURL,
-//     method: "GET",
-//   }).then(function (response) {
-//       var forecastInfo = response
+    console.log(forecastInfo);
+  });
+}
 
-//       console.log(forecastInfo)
+// //make elements dynamically to create cards
+//   var cardEl = $(".card");
+//   cardEl.attr("style", "width: 18 rem, font family: Georgia");
+//   var cardBodyEl = $("<div>").addClass("card-body");
 
-//   var cardEl = $();
-//do the same thing as above, but to the cards
-// }
+// //Card Header Name
+//   var forecastTitle = forecastTitle.name;
+//   var forecastTitleEl = $("<h5>").text(forecastTitle);
+// cardEl.append(forecastTitleEl);
+// cardEl.append(cardBodyEl);
 
-// api.openweathermap.org/data/2.5/forecast?q= + {city name},{state code},{country code}&appid={API key}
+//   var cardtextEl = $("<p>").addClass("card-text");
 
 // //   <div class="card" style="width: 18rem">
 //   <img class="card-img-top" src="..." alt="Card image cap" />
@@ -105,3 +82,38 @@ $("#searchButton").on("click", function (event) {
 
 //   //
 //);
+
+//Card Header Name
+
+// var uvindex = locationInfo.current.uvi;
+// var uvindexEl = $("#UVIndex");
+// uvindexEl.text(`UV Index: ${uvindex}`);
+
+// console.log(location);
+//   $(".city").html("<h1>" + response.name + "Weather</h1>");
+//   $(".date").text(
+//     luxon.DateTime.local().toLocaleString({
+//       weekday: "long",
+//       month: "long",
+//       day: "2-digit",
+
+//
+
+//   let weatherArt = locationInfo.weather[0].icon;
+//   //let iconurl = "https://openweatherman.org/img/w/" + weatherArt;
+//   var iconEl = $("#icon");
+//   iconEl.attr({ src: locationInfo.weather[0].icon });
+
+//   //
+//   console.log($("#searchInput").val());
+// var cardEl = $("<div>").addClass("card");
+// // var imageEl = $("<img>");
+// // imageEl.attr({ src: weather
+// var locationInfo = location.info;
+// var cardBodyEl = $("<div>").addClass("card-body");
+// var cardTitleEl = $("<h5>").text(locationInfo)
+
+//do the same thing as above, but to the cards
+// }
+
+// api.openweathermap.org/data/2.5/forecast?q= + {city name},{state code},{country code}&appid={API key}
