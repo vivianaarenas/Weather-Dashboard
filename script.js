@@ -26,6 +26,13 @@ $("#searchButton").on("click", function (event) {
     var nameEl = $("#nameEl");
     nameEl.text(`City: ${locationName}`);
 
+    var iconCodeCurrent = locationInfo.weather[0].icon;
+    var iconUrlCurrent =
+      "http://openweathermap.org/img/wn/" + iconCodeCurrent + ".png";
+
+    var IconCurrentEl = $("<img>").attr("src", iconUrlCurrent);
+    nameEl.append(IconCurrentEl);
+
     var tempEl = $("#temp");
     var tempF = (locationInfo.main.temp - 273.15) * 1.8 + 32;
     tempEl.text(`Temperature: ${tempF.toFixed(2)}`);
@@ -37,14 +44,21 @@ $("#searchButton").on("click", function (event) {
     var windspeed = locationInfo.wind.speed;
     var windspeedEl = $("#windspeed");
     windspeedEl.text(`Windspeed: ${windspeed}`);
+
+    var lat = locationInfo.coord.lat;
+    var lon = locationInfo.coord.lon;
+    console.log(lat);
+    console.log(lon);
+    render5day(lat, lon);
   });
-  render5day(location);
 });
 
-function render5day(location) {
+function render5day(lat, lon) {
   var forecastURL =
-    "https://api.openweathermap.org/data/2.5/forecast?q=" +
-    location +
+    "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+    lat +
+    "&lon=" +
+    lon +
     "&appid=" +
     APIKey;
   $.ajax({
@@ -54,16 +68,46 @@ function render5day(location) {
     var forecastInfo = response;
 
     console.log(forecastInfo);
+
+    var fiveDay = forecastInfo.daily.slice(0, 5);
+    console.log(fiveDay);
+
+    fiveDay.map(function (day) {
+      var cardEl = $("<div>").addClass("card");
+      cardEl.attr("style", "width: 18 rem");
+
+      var cardBodyEl = $("<div>").addClass("card-body");
+
+      var humidityDay = day.humidity;
+      var humidityDayEl = $("<p>").text(`Humidity: ${humidityDay}`);
+      cardBodyEl.append(humidityDayEl);
+
+      var tempDay = day.temp.min;
+      var tempFDay = (tempDay - 273.15) * 1.8 + 32;
+      var tempDayEl = $("<p>").text(`Temperature: ${tempFDay.toFixed(2)}`);
+
+      cardBodyEl.append(tempDayEl);
+
+      var iconCode = day.weather[0].icon;
+      var iconUrl = "http://openweathermap.org/img/wn/" + iconCode + ".png";
+      var iconEl = $("<img>").attr("src", iconUrl);
+
+      cardBodyEl.append(iconEl);
+      cardEl.append(cardBodyEl);
+      $(".content").append(cardEl);
+    });
+    // array.slice(0, n);
+
+    // var forecastTitle = forecastInfo.city.name;
+    // var forecastTitleEl = $("<h5>").text(forecastTitle);
+    // cardEl.append(forecastTitleEl);
   });
 }
 
 // //make elements dynamically to create cards
-//   var cardEl = $(".card");
-//   cardEl.attr("style", "width: 18 rem, font family: Georgia");
-//   var cardBodyEl = $("<div>").addClass("card-body");
 
 // //Card Header Name
-//   var forecastTitle = forecastTitle.name;
+//   var forecastTitle = forecastInfo.city.name;
 //   var forecastTitleEl = $("<h5>").text(forecastTitle);
 // cardEl.append(forecastTitleEl);
 // cardEl.append(cardBodyEl);
