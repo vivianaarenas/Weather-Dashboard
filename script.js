@@ -94,9 +94,10 @@ function render5day(lat, lon) {
     console.log(fiveDay);
 
     fiveDay.map(function (day) {
+      //var cardDeck = $("<div>").addClass("card-deck");
       var cardEl = $("<div>").addClass("card");
       cardEl.attr("style", "width: 18 rem");
-
+      var cardBlock = $("<div>").addClass("card-block");
       var cardBodyEl = $("<div>").addClass("card-body");
 
       var humidityDay = day.humidity;
@@ -115,7 +116,9 @@ function render5day(lat, lon) {
 
       cardBodyEl.append(iconEl);
       cardEl.append(cardBodyEl);
-      $(".content").append(cardEl);
+      cardBlock.append(cardEl);
+      // cardDeck.append(cardBlock);
+      $(".card-deck").append(cardBlock);
     });
     // array.slice(0, n);
 

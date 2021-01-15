@@ -66,3 +66,15 @@ div.content {
     float: none;
   }
 }
+
+.card {
+  width: fit-content;
+  margin: 10px;
+  padding: 10px;
+  height: 100%;
+}
+.card-deck {
+  column-count: 5;
+  display: inline-block;
+  display: flex;
+}
