@@ -3,6 +3,15 @@ const locationInput = $("#searchInput");
 
 const APIKey = "3de6b63c33a60d225104b1ff597cb08d";
 
+var locationArray = JSON.parse(localStorage.getItem("locations"));
+
+if (locationArray.length > 0) {
+  locationArray.forEach((location) => {
+    const Li = $(".sidebar").append("<li>");
+    Li.text(location);
+  });
+}
+
 $("#searchButton").on("click", function (event) {
   event.preventDefault();
   var location = locationInput.val().trim();
@@ -25,6 +34,13 @@ $("#searchButton").on("click", function (event) {
     var locationName = locationInfo.name;
     var nameEl = $("#nameEl");
     nameEl.text(`City: ${locationName}`);
+    console.log(locationArray);
+    locationArray.push(locationName);
+    localStorage.setItem("locations", locationArray);
+
+    const Li = $(".sidebar").append("<li>");
+    Li.text(locationInfo.name);
+    console.log(Li);
 
     var iconCodeCurrent = locationInfo.weather[0].icon;
     var iconUrlCurrent =
@@ -39,7 +55,7 @@ $("#searchButton").on("click", function (event) {
 
     var humidity = locationInfo.main.humidity;
     var humidityEl = $("#humidity");
-    humidityEl.text(`Humidity: ${humidity}`);
+    humidityEl.text(`Humidity: ${humidity}%`);
 
     var windspeed = locationInfo.wind.speed;
     var windspeedEl = $("#windspeed");
@@ -79,7 +95,7 @@ function render5day(lat, lon) {
       var cardBodyEl = $("<div>").addClass("card-body");
 
       var humidityDay = day.humidity;
-      var humidityDayEl = $("<p>").text(`Humidity: ${humidityDay}`);
+      var humidityDayEl = $("<p>").text(`Humidity: ${humidityDay}%`);
       cardBodyEl.append(humidityDayEl);
 
       var tempDay = day.temp.min;
