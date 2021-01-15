@@ -3,13 +3,17 @@ const locationInput = $("#searchInput");
 
 const APIKey = "3de6b63c33a60d225104b1ff597cb08d";
 
-var locationArray = JSON.parse(localStorage.getItem("locations"));
+var locationArray = JSON.parse(localStorage.getItem("locations")) || [];
 
 if (locationArray.length > 0) {
-  locationArray.forEach((location) => {
-    const Li = $(".sidebar").append("<li>");
-    Li.text(location);
+  $.each(locationArray, function (index, value) {
+    console.log(index + ": " + value);
+    $(".sidebar").append(value);
   });
+  // locationArray.each((location) => {
+  //   const Li = $(".sidebar").append("<li>");
+  //   Li.text(location);
+  // });
 }
 
 $("#searchButton").on("click", function (event) {
@@ -36,7 +40,8 @@ $("#searchButton").on("click", function (event) {
     nameEl.text(`City: ${locationName}`);
     console.log(locationArray);
     locationArray.push(locationName);
-    localStorage.setItem("locations", locationArray);
+
+    localStorage.setItem("locations", JSON.stringify(locationArray));
 
     const Li = $(".sidebar").append("<li>");
     Li.text(locationInfo.name);
