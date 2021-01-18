@@ -8,12 +8,9 @@ var locationArray = JSON.parse(localStorage.getItem("locations")) || [];
 if (locationArray.length > 0) {
   $.each(locationArray, function (index, value) {
     console.log(index + ": " + value);
-    $(".sidebar").append(value);
+    const locationSideName = $(".sidebar").append("<ul>");
+    locationSideName.append(`${value}\n`);
   });
-  // locationArray.each((location) => {
-  //   const Li = $(".sidebar").append("<li>");
-  //   Li.text(location);
-  // });
 }
 
 $("#searchButton").on("click", function (event) {
@@ -32,20 +29,17 @@ $("#searchButton").on("click", function (event) {
     //display response in the console log
 
     var locationInfo = response;
-    console.log(locationInfo);
+    //console.log(locationInfo);
 
     //var contentEl = $(".content");
     var locationName = locationInfo.name;
     var nameEl = $("#nameEl");
-    nameEl.text(`City: ${locationName}`);
-    console.log(locationArray);
+    var todaysDate = moment().format("L");
+    nameEl.text(`${locationName} ${todaysDate}`);
+    //console.log(locationArray);
     locationArray.push(locationName);
 
     localStorage.setItem("locations", JSON.stringify(locationArray));
-
-    const Li = $(".sidebar").append("<li>");
-    Li.text(locationInfo.name);
-    console.log(Li);
 
     var iconCodeCurrent = locationInfo.weather[0].icon;
     var iconUrlCurrent =
@@ -68,8 +62,8 @@ $("#searchButton").on("click", function (event) {
 
     var lat = locationInfo.coord.lat;
     var lon = locationInfo.coord.lon;
-    console.log(lat);
-    console.log(lon);
+    //console.log(lat);
+    //console.log(lon);
     render5day(lat, lon);
   });
 });
