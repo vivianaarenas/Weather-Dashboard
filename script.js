@@ -8,14 +8,28 @@ var locationArray = JSON.parse(localStorage.getItem("locations")) || [];
 if (locationArray.length > 0) {
   $.each(locationArray, function (index, value) {
     console.log(index + ": " + value);
-    const locationSideName = $(".sidebar").append("<ul>");
-    locationSideName.append(`${value}\n`);
+    const locationSideName = $("<li>").append(`${value}\n`);
+    $("#cityList").append(locationSideName);
+
+    //add event listener to each list item in the unordered list
+    //  $("button").on("click",)
+    //locationSideName.append(`${value}\n`);
+    locationSideName.on("click", function (event) {
+      console.log("click");
+      renderDailyWeather(value);
+    });
+
+    //renderDailyWeather(value));
   });
 }
 
 $("#searchButton").on("click", function (event) {
   event.preventDefault();
   var location = locationInput.val().trim();
+  renderDailyWeather(location);
+});
+
+function renderDailyWeather(location) {
   var currentweatherURL =
     "https://api.openweathermap.org/data/2.5/weather?" +
     "q=" +
@@ -66,9 +80,10 @@ $("#searchButton").on("click", function (event) {
     //console.log(lon);
     render5day(lat, lon);
   });
-});
+}
 
 function render5day(lat, lon) {
+  $(".card-deck").empty();
   var forecastURL =
     "https://api.openweathermap.org/data/2.5/onecall?lat=" +
     lat +
@@ -94,6 +109,12 @@ function render5day(lat, lon) {
       var cardBlock = $("<div>").addClass("card-block");
       var cardBodyEl = $("<div>").addClass("card-body");
 
+      //console.log(day.dt);
+      var datePerDay = moment.unix(day.dt).format("L");
+      var datePerDayEl = $("<h3>");
+      datePerDayEl.text(`${datePerDay}`);
+
+      cardBodyEl.append(datePerDayEl);
       var humidityDay = day.humidity;
       var humidityDayEl = $("<p>").text(`Humidity: ${humidityDay}%`);
       cardBodyEl.append(humidityDayEl);
