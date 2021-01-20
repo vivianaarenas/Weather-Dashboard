@@ -8,18 +8,14 @@ var locationArray = JSON.parse(localStorage.getItem("locations")) || [];
 if (locationArray.length > 0) {
   $.each(locationArray, function (index, value) {
     console.log(index + ": " + value);
+
     const locationSideName = $("<li>").append(`${value}\n`);
     $("#cityList").append(locationSideName);
 
-    //add event listener to each list item in the unordered list
-    //  $("button").on("click",)
-    //locationSideName.append(`${value}\n`);
     locationSideName.on("click", function (event) {
       console.log("click");
       renderDailyWeather(value);
     });
-
-    //renderDailyWeather(value));
   });
 }
 
@@ -40,17 +36,12 @@ function renderDailyWeather(location) {
     url: currentweatherURL,
     method: "GET",
   }).then(function (response) {
-    //display response in the console log
-
     var locationInfo = response;
-    //console.log(locationInfo);
 
-    //var contentEl = $(".content");
     var locationName = locationInfo.name;
     var nameEl = $("#nameEl");
     var todaysDate = moment().format("L");
     nameEl.text(`${locationName} ${todaysDate}`);
-    //console.log(locationArray);
     locationArray.push(locationName);
 
     localStorage.setItem("locations", JSON.stringify(locationArray));
@@ -76,8 +67,6 @@ function renderDailyWeather(location) {
 
     var lat = locationInfo.coord.lat;
     var lon = locationInfo.coord.lon;
-    //console.log(lat);
-    //console.log(lon);
     render5day(lat, lon);
   });
 }
@@ -130,13 +119,11 @@ function render5day(lat, lon) {
     }
 
     fiveDay.map(function (day) {
-      //var cardDeck = $("<div>").addClass("card-deck");
       var cardEl = $("<div>").addClass("card");
       cardEl.attr("style", "width: 18 rem");
       var cardBlock = $("<div>").addClass("card-block");
       var cardBodyEl = $("<div>").addClass("card-body");
 
-      //console.log(day.dt);
       var datePerDay = moment.unix(day.dt).format("L");
       var datePerDayEl = $("<h3>");
       datePerDayEl.text(`${datePerDay}`);
@@ -159,13 +146,7 @@ function render5day(lat, lon) {
       cardBodyEl.append(iconEl);
       cardEl.append(cardBodyEl);
       cardBlock.append(cardEl);
-      // cardDeck.append(cardBlock);
       $(".card-deck").append(cardBlock);
     });
-    // array.slice(0, n);
-
-    // var forecastTitle = forecastInfo.city.name;
-    // var forecastTitleEl = $("<h5>").text(forecastTitle);
-    // cardEl.append(forecastTitleEl);
   });
 }

@@ -32,7 +32,7 @@
       <a class="navbar-brand" id="navbar">Weather Dashboard</a>
         <div class="search-container">
           <form class="searchBar">
-            <input type="text" id=searchInput placeholder="Search.." name="search">
+            <input type="text" id=searchInput placeholder="Search for a City.." name="search">
             <button id="searchButton" type="submit"><i class="fab fa-searchengin"></i>
           </form>
         </div>
@@ -43,48 +43,24 @@
   </header>
   <body>
     <!-- Side Nav Bar -->
-   
     <div class="sidebar">
       <ul id="cityList"></ul>
-      
-      <!-- <a class="active" href="#home">Will Eventually</a>
-      <a href="#news">Be linked to </a>
-      <a href="#contact">My Local Storage</a>
-      <a href="#about">Yes</a> -->
     </div>
+   
   
   <div class="content">
-      <h2 id="nameEl" id="icon">City: </h2>
-      <p id="temp">Temperature:</p>
-      <p id="humidity">Humidity</p>
-      <p id="windspeed">Windspeed</p>
-      <p class="UVIndex">UV Index:</p>
+ 
+      <h2 id="nameEl" id="icon"></h2>
+      <p id="temp"></p>
+      <p id="humidity"></p>
+      <p id="windspeed"></p>
+      <p class="UVIndex"></p>
      
   
-  <div class="card-deck">
-
-    
+  <div class="card-deck">  
   </div>
-    <!-- <div class="card" style="width: 18rem"> -->
-      <!-- <img class="card-img-top" src="..." alt="Card image cap" />
-   <div class="card-body">
-        <h5 class="card-title">City Name</h5>
-        <p class="card-text">
-        This needs the date, an icon, temperature and humidity
-        <p id="tempCard">Temperature:</p>
-        <p id="humidityCard">Humidity</p>
-        </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div> -->
-    <!-- </div>   -->
   </div>
-    <!-- Ability to search for a city -->
-    <!--have the abiltiy to save the cities in a list on the left hand side through local storage-->
-
-    <!-- on the right, include information -->
-    <!-- i+=8, it counts every 8, this is what needs to be in the for loop when you're putting every 8th amount-->
-    <!-- information includes name of the city, date, an icon showing the weather (recorded thru samia) 5-day forecast, temp, humidity, wind speed, & UV Index-->
-    <!-- Date to display for the 5 days?? -->
+  
     <script src="script.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
   </body>
