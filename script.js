@@ -102,6 +102,33 @@ function render5day(lat, lon) {
     var fiveDay = forecastInfo.daily.slice(0, 5);
     console.log(fiveDay);
 
+    var UVIndex = fiveDay[0].uvi;
+    var UVIndexEl = $(".UVIndex");
+    UVIndexEl.text(`UVIndex: ${UVIndex}%`);
+    console.log(UVIndex);
+
+    if (UVIndex >= 0 && UVIndex <= 3) {
+      UVIndexEl.removeClass("Moderate");
+      UVIndexEl.removeClass("High");
+      UVIndexEl.removeClass("Severe");
+      UVIndexEl.addClass("Favorable");
+    } else if (UVIndex >= 3 && UVIndex <= 5) {
+      UVIndexEl.removeClass("Favorable");
+      UVIndexEl.removeClass("High");
+      UVIndexEl.removeClass("Severe");
+      UVIndexEl.addClass("Moderate");
+    } else if (UVIndex >= 5 && UVIndex <= 7) {
+      UVIndexEl.removeClass("Favorable");
+      UVIndexEl.removeClass("Moderate");
+      UVIndexEl.removeClass("Severe");
+      UVIndexEl.addClass("High");
+    } else {
+      UVIndexEl.removeClass("Favorable");
+      UVIndexEl.removeClass("Moderate");
+      UVIndexEl.removeClass("High");
+      UVIndexEl.addClass("Severe");
+    }
+
     fiveDay.map(function (day) {
       //var cardDeck = $("<div>").addClass("card-deck");
       var cardEl = $("<div>").addClass("card");
@@ -142,61 +169,3 @@ function render5day(lat, lon) {
     // cardEl.append(forecastTitleEl);
   });
 }
-
-// //make elements dynamically to create cards
-
-// //Card Header Name
-//   var forecastTitle = forecastInfo.city.name;
-//   var forecastTitleEl = $("<h5>").text(forecastTitle);
-// cardEl.append(forecastTitleEl);
-// cardEl.append(cardBodyEl);
-
-//   var cardtextEl = $("<p>").addClass("card-text");
-
-// //   <div class="card" style="width: 18rem">
-//   <img class="card-img-top" src="..." alt="Card image cap" />
-//   <div class="card-body">
-//     <h5 class="card-title">Card title</h5>
-//     <p class="card-text">
-//       Some quick example text to build on the card title and make up the
-//       bulk of the card's content.
-//     </p>
-//     <a href="#" class="btn btn-primary">Go somewhere</a>
-
-//   //
-//);
-
-//Card Header Name
-
-// var uvindex = locationInfo.current.uvi;
-// var uvindexEl = $("#UVIndex");
-// uvindexEl.text(`UV Index: ${uvindex}`);
-
-// console.log(location);
-//   $(".city").html("<h1>" + response.name + "Weather</h1>");
-//   $(".date").text(
-//     luxon.DateTime.local().toLocaleString({
-//       weekday: "long",
-//       month: "long",
-//       day: "2-digit",
-
-//
-
-//   let weatherArt = locationInfo.weather[0].icon;
-//   //let iconurl = "https://openweatherman.org/img/w/" + weatherArt;
-//   var iconEl = $("#icon");
-//   iconEl.attr({ src: locationInfo.weather[0].icon });
-
-//   //
-//   console.log($("#searchInput").val());
-// var cardEl = $("<div>").addClass("card");
-// // var imageEl = $("<img>");
-// // imageEl.attr({ src: weather
-// var locationInfo = location.info;
-// var cardBodyEl = $("<div>").addClass("card-body");
-// var cardTitleEl = $("<h5>").text(locationInfo)
-
-//do the same thing as above, but to the cards
-// }
-
-// api.openweathermap.org/data/2.5/forecast?q= + {city name},{state code},{country code}&appid={API key}

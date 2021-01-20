@@ -83,3 +83,38 @@ div.content {
   display: inline-block;
   display: flex;
 }
+.Favorable {
+  border: solid green 2px;
+  border-radius: 25px;
+  background: green;
+  padding: 5px;
+  width: fit-content;
+  color: white;
+}
+
+.Moderate {
+  border: solid yellow 2px;
+  border-radius: 25px;
+  background: yellow;
+  padding: 5px;
+  width: fit-content;
+  color: white;
+}
+
+.High {
+  border: solid orange 2px;
+  border-radius: 25px;
+  background: orange;
+  padding: 5px;
+  width: fit-content;
+  color: white;
+}
+
+.Severe {
+  border-left: solid red 2px;
+  border-radius: 25px;
+  background: red;
+  padding: 5px;
+  width: fit-content;
+  color: white;
+}
